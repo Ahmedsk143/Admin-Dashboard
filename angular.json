@@ -36,7 +36,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },
-            "scripts": ["./node_modules/chart.js/dist/chart.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -99,7 +99,7 @@
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles/main.scss"],
-            "scripts": ["../node_modules/chart.js/dist/Chart.js"]
+            "scripts": []
           }
         }
       }

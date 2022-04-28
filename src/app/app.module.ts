@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 
-import { ChartModule } from 'primeng/chart';
 import { SharedModule } from './shared/shared.module';
 import { AuthInterceptor } from './Auth/auth-interceptor';
 import { ErrorHandlerInterceptor } from './Auth/error-interceptor';
@@ -28,7 +27,6 @@ import { SigninComponent } from './Auth/signin/signin.component';
     CommonModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ChartModule,
     AccordionModule,
   ],
 
