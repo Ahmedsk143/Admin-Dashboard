@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminAuthGuard } from '../Auth/admin-auth.guard';
+import { AuthGuard } from '../Auth/auth.guard';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { FarmComponent } from './farm/farm.component';
 import { MinersComponent } from './miners/miners.component';
@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: AdminDashboardComponent,
-    canActivate: [AdminAuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: 'overview', component: OverviewComponent },
       { path: 'hashrate-plans', component: PlansComponent },
