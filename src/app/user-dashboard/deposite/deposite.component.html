@@ -1,0 +1,346 @@
+<header class="dash-heading">
+  <h2 class="dash-heading__title">Deposit</h2>
+  <p class="dash-heading__para">Deposit your funds to your crypto wallet</p>
+</header>
+<div class="dashboard-container">
+  <div class="wallet">
+    <div class="wallet__balance">
+      <h3 class="wallet__balance__title">Your balance</h3>
+      <div class="row g-1">
+        <div class="col-12 col-md-6 col-xl-3" *ngFor="let balance of balances">
+          <div class="wallet__balance__box">
+            <div class="wallet__balance__box__icon">
+              <i class="fab fa-btc lg"></i>
+            </div>
+            <div>
+              <h4 class="wallet__balance__box__name">
+                {{ balance.name }} Balance
+              </h4>
+              <p class="wallet__balance__box__value">
+                {{ balance.value }} {{ balance.name }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wallet__funds">
+      <h4 class="wallet__funds__title">Deposit your funds</h4>
+      <div class="wallet__funds__heading">
+        <div class="row g-4">
+          <div class="col-12 col-md-6">
+            <button
+              class="wallet__funds__heading__btn btn btn--disabled"
+              (click)="crypto = true"
+              [ngClass]="{ 'btn--darker--2': crypto }"
+            >
+              <div
+                class="wallet__funds__heading__icon"
+                [ngClass]="{
+                  'wallet__funds__heading__icon--inactive': !crypto
+                }"
+              >
+                <i class="fas fa-wallet"></i>
+              </div>
+              <div class="wallet__funds__heading__title">
+                <span> Crypto Wallet</span>
+              </div>
+            </button>
+          </div>
+          <div class="col-12 col-md-6">
+            <button
+              class="wallet__funds__heading__btn btn btn--disabled"
+              (click)="crypto = false"
+              [ngClass]="{ 'btn--darker--2': !crypto }"
+            >
+              <div
+                class="wallet__funds__heading__icon"
+                [ngClass]="{ 'wallet__funds__heading__icon--inactive': crypto }"
+              >
+                <i class="fas fa-university"></i>
+              </div>
+              <div class="wallet__funds__heading__title">
+                <span class="wallet__funds__heading__title__colored"
+                  >Coming soon!</span
+                >
+                <span>Bank Transfer</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="wallet__funds__body">
+        <div *ngIf="crypto" class="custom-taps custom-taps--trans">
+          <div
+            class="custom-taps__heading custom-taps__heading--trans row align-items-center justify-content-center"
+          >
+            <div
+              class="custom-taps__heading__taps d-flex justify-content-center col-12 col-lg-8"
+            >
+              <div
+                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                (click)="cryptoPlansTap1()"
+                [ngClass]="{
+                  'custom-taps__heading__taps__tap--active ':
+                    cryptoTapOpend == 'tap1'
+                }"
+              >
+                <i class="fab fa-btc sm"></i> BTC
+              </div>
+              <div
+                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                (click)="cryptoPlansTap2()"
+                [ngClass]="{
+                  'custom-taps__heading__taps__tap--active':
+                    cryptoTapOpend == 'tap2'
+                }"
+              >
+                <i class="fab fa-ethereum sm"></i> ETH
+              </div>
+              <div
+                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                (click)="cryptoPlansTap3()"
+                [ngClass]="{
+                  'custom-taps__heading__taps__tap--active':
+                    cryptoTapOpend == 'tap3'
+                }"
+              >
+                <i class="fab fa-btc sm"></i> RVN
+              </div>
+              <div
+                class="custom-taps__heading__taps__tap custom-taps__heading__taps__tap--basic"
+                (click)="cryptoPlansTap4()"
+                [ngClass]="{
+                  'custom-taps__heading__taps__tap--active':
+                    cryptoTapOpend == 'tap4'
+                }"
+              >
+                <i class="fab fa-ethereum sm"></i> STX
+              </div>
+            </div>
+          </div>
+          <div
+            class="custom-taps__body custom-taps__body--small"
+            *ngIf="cryptoTapOpend == 'tap1'"
+          >
+            <div class="wallet__funds__body__content">
+              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="address"
+                    >Bitcoin address</label
+                  >
+                  <div
+                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                    id="address"
+                    name="address"
+                    type="text"
+                    formControlName="address"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('address')?.invalid &&
+                        withdrawForm.get('address')?.dirty
+                    }"
+                  >
+                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <i class="fas fa-copy"></i>
+                  </div>
+                </div>
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="amount"
+                    >Amount</label
+                  >
+                  <input
+                    class="input-field-group__input"
+                    placeholder="Enter your amount"
+                    id="amount"
+                    name="amount"
+                    type="number"
+                    formControlName="amount"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('amount')?.invalid &&
+                        withdrawForm.get('amount')?.dirty
+                    }"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="login-box__btn btn btn--light btn--animated"
+                  routerLink=""
+                >
+                  Withdraw Funds
+                </button>
+              </form>
+            </div>
+          </div>
+          <div
+            class="custom-taps__body custom-taps__body--small"
+            *ngIf="cryptoTapOpend == 'tap2'"
+          >
+            <div class="wallet__funds__body__content">
+              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="address"
+                    >Etherum address</label
+                  >
+                  <div
+                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                    id="address"
+                    name="address"
+                    type="text"
+                    formControlName="address"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('address')?.invalid &&
+                        withdrawForm.get('address')?.dirty
+                    }"
+                  >
+                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <i class="fas fa-copy"></i>
+                  </div>
+                </div>
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="amount"
+                    >Amount</label
+                  >
+                  <input
+                    class="input-field-group__input"
+                    placeholder="Enter your amount"
+                    id="amount"
+                    name="amount"
+                    type="number"
+                    formControlName="amount"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('amount')?.invalid &&
+                        withdrawForm.get('amount')?.dirty
+                    }"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="login-box__btn btn btn--light btn--animated"
+                  routerLink=""
+                >
+                  Withdraw Funds
+                </button>
+              </form>
+            </div>
+          </div>
+          <div
+            class="custom-taps__body custom-taps__body--small"
+            *ngIf="cryptoTapOpend == 'tap3'"
+          >
+            <div class="wallet__funds__body__content">
+              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="address"
+                    >RVN address</label
+                  >
+                  <div
+                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                    id="address"
+                    name="address"
+                    type="text"
+                    formControlName="address"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('address')?.invalid &&
+                        withdrawForm.get('address')?.dirty
+                    }"
+                  >
+                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <i class="fas fa-copy"></i>
+                  </div>
+                </div>
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="amount"
+                    >Amount</label
+                  >
+                  <input
+                    class="input-field-group__input"
+                    placeholder="Enter your amount"
+                    id="amount"
+                    name="amount"
+                    type="number"
+                    formControlName="amount"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('amount')?.invalid &&
+                        withdrawForm.get('amount')?.dirty
+                    }"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="login-box__btn btn btn--light btn--animated"
+                  routerLink=""
+                >
+                  Withdraw Funds
+                </button>
+              </form>
+            </div>
+          </div>
+          <div
+            class="custom-taps__body custom-taps__body--small"
+            *ngIf="cryptoTapOpend == 'tap4'"
+          >
+            <div class="wallet__funds__body__content">
+              <form (ngSubmit)="onWithdraw()" [formGroup]="withdrawForm">
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="address"
+                    >STX address</label
+                  >
+                  <div
+                    class="wallet__funds__body__content__note wallet__funds__body__content__note--copy"
+                    placeholder="example: 1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
+                    id="address"
+                    name="address"
+                    type="text"
+                    formControlName="address"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('address')?.invalid &&
+                        withdrawForm.get('address')?.dirty
+                    }"
+                  >
+                    <span> MPWavU6VbPVgMtQJrXgJGCVsoaPxmoXYT2</span>
+                    <i class="fas fa-copy"></i>
+                  </div>
+                </div>
+                <div class="input-field-group">
+                  <label class="input-field-group__label" for="amount"
+                    >Amount</label
+                  >
+                  <input
+                    class="input-field-group__input"
+                    placeholder="Enter your amount"
+                    id="amount"
+                    name="amount"
+                    type="number"
+                    formControlName="amount"
+                    [ngClass]="{
+                      'input-field-group__input--invalid':
+                        withdrawForm.get('amount')?.invalid &&
+                        withdrawForm.get('amount')?.dirty
+                    }"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="login-box__btn btn btn--light btn--animated"
+                  routerLink=""
+                >
+                  Withdraw Funds
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
