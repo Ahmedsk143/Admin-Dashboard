@@ -7,7 +7,7 @@ import { SharedService } from '../shared/shared.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AdminAuthService {
+export class AuthService {
   private rootURL = 'https://cominer.herokuapp.com';
   private key =
     'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
@@ -51,7 +51,7 @@ export class AdminAuthService {
           sessionStorage.setItem('token', this.token);
           sessionStorage.setItem('refersh', this.refersh);
           this.sharedService.isLoading.next(false);
-          this.router.navigate(['admin/dashboard/overview']);
+          this.router.navigate(['/dashboard/overview']);
         },
         error: (err) => {
           this.otpError$.next(true);
@@ -87,7 +87,7 @@ export class AdminAuthService {
           this.isAuthenticated = false;
           this.authStatusListener$.next(false);
           this.sharedService.isLoading.next(false);
-          this.router.navigate(['/admin/signin']);
+          this.router.navigate(['/signin']);
         },
         error: (err) => {
           sessionStorage.removeItem('token');
@@ -97,7 +97,7 @@ export class AdminAuthService {
           this.isAuthenticated = false;
           this.authStatusListener$.next(false);
           this.sharedService.isLoading.next(false);
-          this.router.navigate(['/admin/signin']);
+          this.router.navigate(['/signin']);
         },
       });
   }
@@ -109,6 +109,6 @@ export class AdminAuthService {
     this.isAuthenticated = false;
     this.authStatusListener$.next(false);
     this.sharedService.isLoading.next(false);
-    this.router.navigate(['/admin/signin']);
+    this.router.navigate(['/signin']);
   }
 }

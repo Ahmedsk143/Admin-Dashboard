@@ -29,10 +29,12 @@ export class FarmComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.sharedSerivce.isLoading.next(true);
     this.dashboardService.getActiveWorkers().subscribe({
       next: (res) => {
         this.activeWorkers = res;
         this.activeWorkersLength = res.length;
+        this.sharedSerivce.isLoading.next(false);
       },
       error: (err) => {
         this.dashboardService.errorHandler(err);
@@ -42,6 +44,7 @@ export class FarmComponent implements OnInit {
       next: (res) => {
         this.inactiveWorkers = res;
         this.inactiveWorkersLength = res.length;
+        this.sharedSerivce.isLoading.next(false);
       },
       error: (err) => {
         this.dashboardService.errorHandler(err);

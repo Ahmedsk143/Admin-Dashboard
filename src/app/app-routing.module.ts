@@ -1,52 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './Auth/admin/admin.component';
-import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
+import { AuthGuard } from './Auth/auth.guard';
 import { SigninComponent } from './Auth/signin/signin.component';
-import { SignupComponent } from './Auth/signup/signup.component';
-import { UserComponent } from './Auth/user/user.component';
 import { MerchantComponent } from './merchant/merchant.component';
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+    path: 'signin',
+    component: SigninComponent,
   },
   {
-    path: 'user/dashboard',
-    loadChildren: () =>
-      import('./user-dashboard/user-dashboard.module').then(
-        (m) => m.UserDashboardModule
-      ),
-  },
-  {
-    path: 'admin/dashboard',
+    path: 'dashboard',
     loadChildren: () =>
       import('./admin-dashboard/admin-dashboard.module').then(
         (m) => m.AdminDashboardModule
       ),
-  },
-  // { path: 'signupOrsignin', component: SignupOrsigninComponent },
-  {
-    path: 'user',
-    component: UserComponent,
-    children: [
-      { path: 'signin', component: SigninComponent },
-      { path: 'signup', component: SignupComponent },
-      { path: 'reset-your-password', component: ResetPasswordComponent },
-    ],
-  },
-  {
-    path: 'admin',
-    component: UserComponent,
-    children: [{ path: 'signin', component: AdminComponent }],
+    canActivate: [AuthGuard],
   },
   {
     path: 'test',
     component: MerchantComponent,
   },
-  // { path: '', redirectTo: 'user/signin', pathMatch: 'full' },
-  // { path: '**', redirectTo: 'user/signin' },
+  { path: '', redirectTo: 'signin', pathMatch: 'full' },
+  { path: '**', redirectTo: 'signin' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

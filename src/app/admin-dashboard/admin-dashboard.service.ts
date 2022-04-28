@@ -6,11 +6,10 @@ import { RequestNew } from './models/req-new.model';
 import { RequestApproved } from './models/req-approved.model';
 import { User } from './models/user.model';
 import { UserPlan } from './models/user-plan.model';
-import { UserAsic } from './models/userAsic.model';
 import { Log } from './models/log.model';
 import { Worker } from './models/worker.model';
-import { AdminAuthService } from '../Auth/admin-auth.service';
-import { catchError, tap, throwError } from 'rxjs';
+import { AuthService } from '../Auth/auth.service';
+import { throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -18,10 +17,7 @@ export class AdminDashboardService {
   private rootURL = 'https://cominer.herokuapp.com';
   private key =
     'c3fe929c35dd0cbcc8f062bb60e9d2ce7d14be21513d07c53e370d81ba9de4a4';
-  constructor(
-    private http: HttpClient,
-    private authService: AdminAuthService
-  ) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ////////////////////             Plans               ////////////////////////
   getPlans() {

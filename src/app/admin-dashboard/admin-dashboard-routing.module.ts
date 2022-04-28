@@ -14,8 +14,8 @@ const routes: Routes = [
   {
     path: '',
     component: AdminDashboardComponent,
-    canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: 'overview' },
       { path: 'overview', component: OverviewComponent },
       { path: 'hashrate-plans', component: PlansComponent },
       { path: 'subscribed-users', component: SubUsersComponent },

@@ -1,29 +1,6 @@
 <div class="login-box">
-  <h1 class="login-box__title">Login</h1>
-  <form (ngSubmit)="onSignin()" [formGroup]="signinForm">
-    <div class="input-field-group">
-      <label class="input-field-group__label" for="email">Email</label>
-      <input
-        class="input-field-group__input"
-        placeholder="Enter your email"
-        id="email"
-        name="email"
-        type="text"
-        formControlName="email"
-        [ngClass]="{
-          'input-field-group__input--invalid':
-            signinForm.get('email')?.invalid && signinForm.get('email')?.dirty
-        }"
-      />
-      <!-- <div
-        class="input-field-group__error"
-        *ngIf="
-          signinForm.get('email')?.invalid && signinForm.get('email')?.touched
-        "
-      >
-        *invalid input
-      </div> -->
-    </div>
+  <h1 class="login-box__title">Admin Login</h1>
+  <form (ngSubmit)="onSignin()" [formGroup]="signinForm" *ngIf="!sentOtp">
     <div class="input-field-group">
       <label class="input-field-group__label" for="passowrd">Password</label>
       <input
@@ -34,7 +11,7 @@
         formControlName="password"
         [ngClass]="{
           'input-field-group__input--invalid':
-            signinForm.get('password')?.invalid &&
+            otpForm.get('password')?.invalid &&
             signinForm.get('password')?.dirty
         }"
         #input
@@ -49,31 +26,39 @@
         (click)="changeInput(input)"
         *ngIf="passwordShown"
       ></i>
-
-      <!-- <div
-        class="input-field-group__error"
-        *ngIf="
-          signinForm.get('password')?.invalid &&
-          signinForm.get('password')?.touched
-        "
-      >
-        *input required
-      </div> -->
     </div>
+    <button type="submit" class="login-box__btn btn btn--light btn--animated">
+      Send OTP
+    </button>
+    <span class="login-box__error" *ngIf="signinError"
+      >Password is incorrect, try again!</span
+    >
+  </form>
+
+  <!-- otp -->
+  <form (ngSubmit)="onOTP()" [formGroup]="otpForm" *ngIf="sentOtp">
+    <div class="input-field-group">
+      <label class="input-field-group__label" for="passowrd">Enter OTP</label>
+      <input
+        class="input-field-group__input"
+        placeholder="Enter your otp"
+        type="trxt"
+        id="otp"
+        formControlName="otp"
+        [ngClass]="{
+          'input-field-group__input--invalid':
+            otpForm.get('otp')?.invalid && otpForm.get('otp')?.dirty
+        }"
+      />
+    </div>
+    <div style="margin-left: auto">
+      Wait 30s or
+      <a class="login-box__second-action" (click)="onSignin()">Send again! </a>
+    </div>
+
     <button type="submit" class="login-box__btn btn btn--light btn--animated">
       Login
     </button>
-    <span
-      class="login-box__error"
-      *ngIf="
-        (signinForm.get('password')?.invalid &&
-          signinForm.get('password')?.dirty) ||
-        (signinForm.get('email')?.invalid && signinForm.get('email')?.dirty)
-      "
-      >The email or password you entered is incorrect. Please try again</span
-    >
-    <a class="login-box__forget" routerLink="../reset-your-password"
-      >Forgot password?
-    </a>
+    <span class="login-box__error" *ngIf="otpError">Wrong OTP, try again!</span>
   </form>
 </div>

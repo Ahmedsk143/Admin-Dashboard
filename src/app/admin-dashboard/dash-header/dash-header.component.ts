@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { AdminAuthService } from 'src/app/Auth/admin-auth.service';
+import { AuthService } from 'src/app/Auth/auth.service';
 
 @Component({
   selector: 'app-dash-header',
@@ -13,7 +13,7 @@ export class DashHeaderComponent implements OnInit {
   dropdownCollapsed = false;
   collapsed = false;
   toggleMenu = false;
-  constructor(private router: Router, private authService: AdminAuthService) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     //to survive a reload
