@@ -22,22 +22,22 @@ export class AuthService {
     private router: Router,
     private sharedService: SharedService
   ) {}
-  public getToken() {
+  getToken() {
     return this.token;
   }
-  public getRefersh() {
+  getRefersh() {
     return this.refersh;
   }
-  public getAuth() {
+  getAuth() {
     return this.isAuthenticated;
   }
 
-  public signinFF(password: String) {
+  signinFF(password: String) {
     return this.http.post(`${this.rootURL}/admin/FFAuth?key=${this.key}`, {
       password: password,
     });
   }
-  public getOTP(otp: String) {
+  validateOTP(otp: String) {
     this.http
       .post(`${this.rootURL}/admin/2FAuth?key=${this.key}`, {
         otp: otp,
@@ -58,7 +58,7 @@ export class AuthService {
         },
       });
   }
-  public autoAuth() {
+  autoAuth() {
     const token = sessionStorage.getItem('token');
     const refersh = sessionStorage.getItem('refersh');
     if (!token || !refersh) {
@@ -69,7 +69,7 @@ export class AuthService {
     this.isAuthenticated = true;
     this.authStatusListener$.next(true);
   }
-  public logout() {
+  logout() {
     this.http
       .post(
         `${this.rootURL}/admin/logout?key=${this.key}`,

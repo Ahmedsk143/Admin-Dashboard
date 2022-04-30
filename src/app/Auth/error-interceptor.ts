@@ -16,13 +16,13 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       headers: req.headers.set('Authorization', 'Bearer ' + authToken),
     });
     return next.handle(authRequest).pipe(
-      catchError((err: HttpErrorResponse, caught) => {
+      catchError((err: HttpErrorResponse) => {
+        console.log('Below is the error from the error handler...');
         console.log(err);
         if (err.status == 401) {
           this.AuthService.removeAuthData();
-          return throwError(() => new Error(this.setErrors(err)));
         }
-        return caught;
+        return throwError(() => err);
       })
     );
   }
