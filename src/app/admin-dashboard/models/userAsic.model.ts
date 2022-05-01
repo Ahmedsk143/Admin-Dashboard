@@ -13,4 +13,5 @@ export class UserAsic {
   'address': string;
   'workerID': string;
   'pool': string;
+  'hashPower': string;
 }

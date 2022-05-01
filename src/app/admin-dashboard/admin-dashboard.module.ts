@@ -23,6 +23,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SubUserComponent } from './sub-user/sub-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FarmComponent } from './farm/farm.component';
+import { MerchantsComponent } from './merchants/merchants.component';
+import { MerchantMinerComponent } from './merchant-miner/merchant-miner.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { FarmComponent } from './farm/farm.component';
     RequestComponent,
     SubUserComponent,
     FarmComponent,
+    MerchantsComponent,
+    MerchantMinerComponent,
   ],
   imports: [
     CommonModule,

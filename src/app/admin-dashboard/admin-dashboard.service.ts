@@ -10,6 +10,10 @@ import { Log } from './models/log.model';
 import { Worker } from './models/worker.model';
 import { AuthService } from '../Auth/auth.service';
 import { throwError } from 'rxjs';
+import { Merchant } from './models/merchant.model';
+import { DistAsic } from './models/dist-asic.model';
+import { WorkerPlan } from './models/worker-plan.model';
+import { MerchantUser } from './models/merchant-users.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -156,7 +160,7 @@ export class AdminDashboardService {
     );
   }
   getUserData(userID: string) {
-    return this.http.get<User>(
+    return this.http.get<{ user: User; userSeller: boolean }>(
       `${this.rootURL}/api/admin/getUserData/${userID}?key=${this.key}`
     );
   }
@@ -233,5 +237,31 @@ export class AdminDashboardService {
       }
     }
     return errorMessage;
+  }
+  ////////////////Merchants//////////////
+  getMerchants() {
+    return this.http.get<{ sellers: Merchant[] }>(
+      `${this.rootURL}/api/seller/admin/getsellers?key=${this.key}`
+    );
+  }
+  getMerchantDist(id: string) {
+    return this.http.get<DistAsic[]>(
+      `${this.rootURL}/api/seller/admin/getworkers/${id}?key=${this.key}`
+    );
+  }
+  getWorkerById(id: string) {
+    return this.http.get<DistAsic[]>(
+      `${this.rootURL}/api/seller/admin/getworkerdata/${id}?key=${this.key}`
+    );
+  }
+  getWorkerPlansById(id: string) {
+    return this.http.get<{ workerPlans: WorkerPlan[] }>(
+      `${this.rootURL}/api/seller/admin/getworkerplans/${id}?key=${this.key}`
+    );
+  }
+  getWorkerUsersById(id: string) {
+    return this.http.get<{ planContracts: MerchantUser[] }>(
+      `${this.rootURL}/api/seller/admin/getplancontracts/${id}?key=${this.key}`
+    );
   }
 }

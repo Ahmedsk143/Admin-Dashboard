@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SharedService } from 'src/app/shared/shared.service';
 import { AdminDashboardService } from '../admin-dashboard.service';
+import { DistAsic } from '../models/dist-asic.model';
 import { Log } from '../models/log.model';
 import { UserPlan } from '../models/user-plan.model';
 import { User } from '../models/user.model';
@@ -25,6 +26,7 @@ export class SubUserComponent implements OnInit {
   userData: User = new User();
   sub: Subscription;
   userID: string;
+  isMerchant = false;
   userBalances: { cryptoName: string; value: string }[];
   selectedTap = 'tap1';
   selectedTap3 = 'tap3-1';
@@ -43,6 +45,9 @@ export class SubUserComponent implements OnInit {
   withdrawLogs: Log[];
   depositLogsLength: number;
   withdrawLogsLength: number;
+  /////////////////// Distributed devices ///////////
+  distAsics: DistAsic[];
+  distAsicsLength: number;
   constructor(
     private dashboardService: AdminDashboardService,
     private activatedRoute: ActivatedRoute,
@@ -55,23 +60,25 @@ export class SubUserComponent implements OnInit {
       this.userID = params.get('userID')!;
       this.dashboardService.getUserData(this.userID).subscribe({
         next: (res) => {
-          this.userData = res;
+          this.userData = res.user;
+          this.isMerchant = res.userSeller;
+          console.log(res);
           this.userBalances = [
             {
               cryptoName: 'BTC',
-              value: res.balance.btc,
+              value: res.user.balance.btc,
             },
             {
               cryptoName: 'ETH',
-              value: res.balance.eth,
+              value: res.user.balance.eth,
             },
             {
               cryptoName: 'LTCT',
-              value: res.balance.ltct,
+              value: res.user.balance.ltct,
             },
             {
               cryptoName: 'RVN',
-              value: res.balance.rvn,
+              value: res.user.balance.rvn,
             },
           ];
           this.sharedSerivce.isLoading.next(false);
@@ -119,6 +126,15 @@ export class SubUserComponent implements OnInit {
       next: (res) => {
         this.withdrawLogs = res;
         this.withdrawLogsLength = res.length;
+      },
+      error: (err) => {
+        this.dashboardService.errorHandler(err);
+      },
+    });
+    this.dashboardService.getMerchantDist(this.userID).subscribe({
+      next: (res) => {
+        this.distAsics = res;
+        this.distAsicsLength = res.length;
       },
       error: (err) => {
         this.dashboardService.errorHandler(err);

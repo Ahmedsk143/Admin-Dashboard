@@ -11,7 +11,6 @@
   max-width: 36rem;
   padding: 2.4rem;
   margin: 0 auto;
-
   &--online {
     border: 2px solid green !important;
   }
@@ -20,6 +19,9 @@
   }
   &--demand {
     border: 2px solid $color-secondary !important;
+  }
+  &--normal {
+    border: 2px solid #302c3f !important;
   }
   &__title {
     font-weight: 700;

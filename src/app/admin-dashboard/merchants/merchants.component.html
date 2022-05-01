@@ -1,0 +1,91 @@
+<div class="dashboard-container dashboard-container--admin">
+  <h2 class="dash-heading__title mb-5">Merchants</h2>
+
+  <div class="table">
+    <p-table
+      [value]="merchantsData"
+      responsiveLayout="stack"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 15, 20]"
+      sortField="subscribers"
+      [sortOrder]="-1"
+    >
+      <ng-template pTemplate="caption">
+        Merchants ({{ merchantsLength }})
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="sellerID">
+            Merchant ID
+            <p-columnFilter
+              type="text"
+              field="sellerID"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="sellerID"></p-sortIcon>
+          </th>
+
+          <th pSortableColumn="sellerData[0].userName">
+            Merchant info
+            <p-columnFilter
+              type="text"
+              field="sellerData[0].userName"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="sellerData[0].userName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="sellerData[0].phone">
+            Phone number
+            <p-columnFilter
+              type="text"
+              field="sellerData[0].phone"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="sellerData[0].phone"></p-sortIcon>
+          </th>
+          <th pSortableColumn="subscribers">
+            Total subscribers
+            <p-columnFilter
+              type="text"
+              field="subscribers"
+              display="menu"
+            ></p-columnFilter>
+            <p-sortIcon field="subscribers"></p-sortIcon>
+          </th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>
+            <span class="p-column-title"> Merchant ID </span>
+            <span class="table__sub">{{ user.sellerID }}</span>
+          </td>
+          <td>
+            <span class="p-column-title"> User info</span>
+            <div class="table__header">{{ user.sellerData[0].userName }}</div>
+            <div class="table__sub">{{ user.sellerData[0].userName }}</div>
+          </td>
+          <td>
+            <span class="p-column-title"> Phone number</span>
+            <span class="table__header">{{ user.sellerData[0].phone }}</span>
+          </td>
+          <td>
+            <span class="p-column-title"> Total subscribers </span>
+            <span class="table__header">{{ user.subscribers }}</span>
+          </td>
+          <td>
+            <span class="p-column-title">Action</span>
+            <button
+              class="btn btn--darker btn--animated"
+              routerLink="../../dashboard/profile/{{ user.sellerID }}"
+            >
+              See Profile
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

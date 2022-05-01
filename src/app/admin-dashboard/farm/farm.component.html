@@ -39,7 +39,7 @@
       >
     </div>
     <!-- Active Workers  -->
-    <div class="horizontal-taps__body pt-5" *ngIf="selectedTap == 'tap1'">
+    <div class="horizontal-taps__body" *ngIf="selectedTap == 'tap1'">
       <div class="horizontal-taps__body__title">
         Online Workers ({{ activeWorkersLength }})
       </div>
@@ -157,7 +157,7 @@
       </div>
     </div>
     <!-- Inactive Workers  -->
-    <div class="horizontal-taps__body pt-5" *ngIf="selectedTap == 'tap2'">
+    <div class="horizontal-taps__body" *ngIf="selectedTap == 'tap2'">
       <div class="horizontal-taps__body__title">
         Offline Workers ({{ inactiveWorkersLength }})
       </div>

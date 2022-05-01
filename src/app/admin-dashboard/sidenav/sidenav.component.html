@@ -36,6 +36,7 @@
         <i class="fas fa-angle-up arrow" *ngIf="collapsed"></i>
         <a routerLink="miners" style="visibility: hidden"></a>
         <a routerLink="request" style="visibility: hidden"></a>
+        <a routerLink="merchants" style="visibility: hidden"></a>
       </li>
       <li
         routerLink="miners"
@@ -52,6 +53,14 @@
         *ngIf="collapsed"
       >
         <a>Buy request</a>
+      </li>
+      <li
+        routerLink="merchants"
+        routerLinkActive="side-nav__content__item--collapsed--highlight"
+        class="side-nav__content__item side-nav__content__item--collapsed"
+        *ngIf="collapsed"
+      >
+        <a>Merchants</a>
       </li>
       <li
         routerLink="farm"

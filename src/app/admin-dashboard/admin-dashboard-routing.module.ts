@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../Auth/auth.guard';
 import { AdminDashboardComponent } from './admin-dashboard.component';
 import { FarmComponent } from './farm/farm.component';
+import { MerchantMinerComponent } from './merchant-miner/merchant-miner.component';
+import { MerchantsComponent } from './merchants/merchants.component';
 import { MinersComponent } from './miners/miners.component';
 import { OverviewComponent } from './overview/overview.component';
 import { PlansComponent } from './plans/plans.component';
@@ -22,6 +24,8 @@ const routes: Routes = [
       { path: 'profile/:userID', component: SubUserComponent },
       { path: 'miners', component: MinersComponent },
       { path: 'request', component: RequestComponent },
+      { path: 'merchants', component: MerchantsComponent },
+      { path: 'worker/:workerID', component: MerchantMinerComponent },
       { path: 'farm', component: FarmComponent },
     ],
   },

@@ -22,7 +22,7 @@ const routes: Routes = [
     component: MerchantComponent,
   },
   { path: '', redirectTo: 'signin', pathMatch: 'full' },
-  { path: '**', redirectTo: 'signin' },
+  // { path: '**', redirectTo: 'signin' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
