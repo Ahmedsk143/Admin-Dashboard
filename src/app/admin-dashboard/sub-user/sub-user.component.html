@@ -62,7 +62,8 @@
               {{ balance.cryptoName }} Balance
             </h4>
             <p class="wallet__balance__box__value">
-              {{ balance.value }} {{ balance.cryptoName }}
+              {{ balance.value!.toString().substring(0, 10) }}
+              {{ balance.cryptoName }}
             </p>
           </div>
         </div>
@@ -175,11 +176,15 @@
               </td>
               <td>
                 <span class="p-column-title">Total Mined</span>
-                <span class="table__header">{{ plan.totalMined }}</span>
+                <span class="table__header">{{
+                  plan.totalMined!.toString().substring(0, 10)
+                }}</span>
               </td>
               <td>
-                <span class="p-column-title">Hash power</span>
-                <span class="table__header">{{ plan.hashPower }} GH/S</span>
+                <span class="p-column-title">Hash Power</span>
+                <span class="table__header"
+                  >{{ plan.hashPower | number: "1.0-2" }} GH/S</span
+                >
               </td>
 
               <td>
@@ -256,11 +261,15 @@
               </td>
               <td>
                 <span class="p-column-title">Total Mined</span>
-                <span class="table__header">{{ plan.totalMined }}</span>
+                <span class="table__header">{{
+                  plan.totalMined!.toString().substring(0, 10)
+                }}</span>
               </td>
               <td>
                 <span class="p-column-title">Hash power</span>
-                <span class="table__header">{{ plan.hashPower }} GH/S</span>
+                <span class="table__header"
+                  >{{ plan.hashPower | number: "1.0-2" }} GH/S</span
+                >
               </td>
 
               <td>
@@ -365,7 +374,7 @@
                 >
                   <span class="miner__details__title">Total Mined</span>
                   <span class="miner__details__sub">{{
-                    miner.totalMined
+                    miner.totalMined!.toString().substring(0, 10)
                   }}</span>
                 </div>
                 <div
@@ -629,90 +638,88 @@
       </div>
       <div class="row p-3 gy-5">
         <div class="col-12 col-lg-6" *ngFor="let miner of distAsics">
-          <ng-container>
-            <div
-              class="miner miner--normal"
-              style="max-width: 45.6rem; width: 45.6rem"
-            >
-              <span class="miner__online">Online</span>
-              <h3 class="miner__title">{{ miner.workerData[0].asicName }}</h3>
-              <!-- <div class="miner__sub">
+          <div
+            class="miner miner--normal"
+            style="max-width: 45.6rem; width: 45.6rem"
+          >
+            <span class="miner__online">Online</span>
+            <h3 class="miner__title">{{ miner.workerData[0].asicName }}</h3>
+            <!-- <div class="miner__sub">
                 <i class="fab fa-btc md" style="margin-right: 8px"></i>
                 Bitcoin — SHA-256
               </div> -->
-              <img class="miner__img" src="../../../assets/miner.svg" alt="" />
-              <div class="miner__details row g-3">
-                <div
-                  class="col-12"
-                  style="
-                    font-weight: 400;
-                    font-size: 1.4re;
-                    color: #b7b4c7;
-                    margin-bottom: 1rem;
-                  "
-                >
-                  Device Bought on: {{ miner.workerData[0].createdAt | date }}
-                </div>
-                <div class="col-6">
-                  <span class="miner__details__title">Available Hashrate</span>
-                  <span class="miner__details__sub">{{
-                    miner.availableHashrate
-                  }}</span>
-                </div>
-                <div class="col-6">
-                  <span class="miner__details__title">Total Subscriptions</span>
-                  <span class="miner__details__sub">{{
-                    miner.totalConnectedUsers
-                  }}</span>
-                </div>
-                <div class="col-12">
-                  <span class="miner__details__title">Start Date</span>
-                  <span class="miner__details__sub">{{
-                    miner.workerData[0].startDate | date: "medium"
-                  }}</span>
-                </div>
-
-                <div class="col-6">
-                  <span class="miner__details__title">Host Fees</span>
-                  <span class="miner__details__sub"
-                    >{{ miner.workerData[0].hostFees }}%</span
-                  >
-                </div>
-                <div class="col-6">
-                  <span class="miner__details__title">Worker ID</span>
-                  <span class="miner__details__sub">{{
-                    miner.workerData[0].workerID
-                  }}</span>
-                </div>
-                <div class="col-6">
-                  <span class="miner__details__title">Total Mined</span>
-                  <span class="miner__details__sub">{{
-                    miner.workerData[0].totalMined
-                  }}</span>
-                </div>
-                <div class="col-6">
-                  <span class="miner__details__title">Pool</span>
-                  <span class="miner__details__sub">{{
-                    miner.workerData[0].pool
-                  }}</span>
-                </div>
-                <div class="col-12">
-                  <span class="miner__details__title">Address</span>
-                  <span
-                    class="miner__details__sub"
-                    style="overflow-wrap: anywhere"
-                    >{{ miner.workerData[0].address }}</span
-                  >
-                </div>
-                <button
-                  class="btn btn--darker btn--animated"
-                  routerLink="../../../dashboard/worker/{{ miner.workerObjId }}"
-                >
-                  See Details
-                </button>
+            <img class="miner__img" src="../../../assets/miner.svg" alt="" />
+            <div class="miner__details row g-3">
+              <div
+                class="col-12"
+                style="
+                  font-weight: 400;
+                  font-size: 1.4re;
+                  color: #b7b4c7;
+                  margin-bottom: 1rem;
+                "
+              >
+                Device Bought on: {{ miner.workerData[0].createdAt | date }}
               </div>
+              <div class="col-6">
+                <span class="miner__details__title">Available Hashrate</span>
+                <span class="miner__details__sub">{{
+                  miner.availableHashrate | number: "1.0-2"
+                }}</span>
+              </div>
+              <div class="col-6">
+                <span class="miner__details__title">Total Subscriptions</span>
+                <span class="miner__details__sub">{{
+                  miner.totalConnectedUsers
+                }}</span>
+              </div>
+              <div class="col-12">
+                <span class="miner__details__title">Start Date</span>
+                <span class="miner__details__sub">{{
+                  miner.workerData[0].startDate | date: "medium"
+                }}</span>
+              </div>
+
+              <div class="col-6">
+                <span class="miner__details__title">Host Fees</span>
+                <span class="miner__details__sub"
+                  >{{ miner.workerData[0].hostFees }}%</span
+                >
+              </div>
+              <div class="col-6">
+                <span class="miner__details__title">Worker ID</span>
+                <span class="miner__details__sub">{{
+                  miner.workerData[0].workerID
+                }}</span>
+              </div>
+              <div class="col-6">
+                <span class="miner__details__title">Total Mined</span>
+                <span class="miner__details__sub">{{
+                  miner.workerData[0].totalMined!.toString().substring(0, 10)
+                }}</span>
+              </div>
+              <div class="col-6">
+                <span class="miner__details__title">Pool</span>
+                <span class="miner__details__sub">{{
+                  miner.workerData[0].pool
+                }}</span>
+              </div>
+              <div class="col-12">
+                <span class="miner__details__title">Address</span>
+                <span
+                  class="miner__details__sub"
+                  style="overflow-wrap: anywhere"
+                  >{{ miner.workerData[0].address }}</span
+                >
+              </div>
+              <button
+                class="btn btn--darker btn--animated"
+                routerLink="../../../dashboard/worker/{{ miner.workerObjId }}"
+              >
+                See Details
+              </button>
             </div>
-          </ng-container>
+          </div>
         </div>
       </div>
     </div>

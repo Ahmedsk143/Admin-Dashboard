@@ -52,13 +52,13 @@
       <div class="details-item">
         <div class="merchant-header__sub">Total Hashrate Power</div>
         <div class="merchant-header__value">
-          {{ worker.workerData[0].hashPower }}GH/S
+          {{ worker.workerData[0].hashPower | number: "1.0-2" }}GH/S
         </div>
       </div>
       <div class="details-item">
         <div class="merchant-header__sub">Total Hashrate Available</div>
         <div class="merchant-header__value">
-          {{ worker.availableHashrate }} GH/S
+          {{ worker.availableHashrate | number: "1.0-2" }} GH/S
         </div>
       </div>
       <div class="details-item">
@@ -83,7 +83,7 @@
       <div class="details-item">
         <div class="merchant-header__sub">Total Mined</div>
         <div class="merchant-header__value">
-          {{ worker.workerData[0].totalMined }}
+          {{ worker.workerData[0].totalMined!.toString().substring(0, 10) }}
         </div>
       </div>
     </div>
@@ -131,8 +131,10 @@
                 <p class="miner__box__sub">{{ plan.algorithm }}</p>
               </div>
               <div class="miner__box">
-                <h6 class="miner__box__title">hashPower</h6>
-                <p class="miner__box__sub">{{ plan.hashPower }}GH/S</p>
+                <h6 class="miner__box__title">Hash Power</h6>
+                <p class="miner__box__sub">
+                  {{ plan.hashPower | number: "1.0-2" }}GH/S
+                </p>
               </div>
               <div class="miner__box">
                 <h6 class="miner__box__title">Price</h6>
@@ -283,7 +285,9 @@
               </td>
               <td>
                 <span class="p-column-title">Total mined</span>
-                <span class="table__header">{{ user.totalMined }}</span>
+                <span class="table__header">{{
+                  user.totalMined!.toString().substring(0, 10)
+                }}</span>
               </td>
             </tr>
           </ng-template>

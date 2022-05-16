@@ -113,7 +113,7 @@
           <div class="balance-box__item__value">
             <!-- <i class="fas fa-spinner" *ngIf="!btc"></i> -->
             <span *ngIf="!btc">0.00000000</span>
-            <span *ngIf="btc"> {{ btc }} </span>BTC
+            <span *ngIf="btc"> {{ btc!.toString().substring(0, 10) }} </span>BTC
           </div>
         </div>
         <div class="balance-box__item">
@@ -123,7 +123,7 @@
           </div>
           <div class="balance-box__item__value">
             <span *ngIf="!eth">0.00000000</span>
-            <span *ngIf="eth"> {{ eth }} </span>ETH
+            <span *ngIf="eth"> {{ eth!.toString().substring(0, 10) }} </span>ETH
           </div>
         </div>
         <div class="balance-box__item">
@@ -137,7 +137,8 @@
           </div>
           <div class="balance-box__item__value">
             <span *ngIf="!ltct">0.00000000</span>
-            <span *ngIf="ltct"> {{ ltct }} </span>LTCT
+            <span *ngIf="ltct"> {{ ltct!.toString().substring(0, 10) }} </span
+            >LTCT
           </div>
         </div>
         <div class="balance-box__item">
@@ -152,7 +153,7 @@
           <div class="balance-box__item__value">
             <!-- <i class="fas fa-spinner" *ngIf="!btc"></i> -->
             <span *ngIf="!rvn">0.00000000</span>
-            <span *ngIf="rvn"> {{ rvn }} </span>RVN
+            <span *ngIf="rvn"> {{ rvn!.toString().substring(0, 10) }} </span>RVN
           </div>
         </div>
       </div>
@@ -175,7 +176,9 @@
       <div class="plan-box">
         <div class="plan-box__title">{{ plan.planName }}</div>
         <div class="plan-box__sub">Total Subscribers</div>
-        <div class="plan-box__value">{{ plan.numOfSubscribtions }}</div>
+        <div class="plan-box__value" style="color: #13d713">
+          {{ plan.numOfSubscribtions }}
+        </div>
         <div class="row">
           <div class="col-6">
             <div class="plan-box__sub">Crypto Name</div>
@@ -202,7 +205,9 @@
       <div class="plan-box">
         <div class="plan-box__title">{{ miner.asicName }}</div>
         <div class="plan-box__sub">Total Subscribers</div>
-        <div class="plan-box__value">{{ miner.numOfSubscribtions }}</div>
+        <div class="plan-box__value" style="color: #13d713">
+          {{ miner.numOfSubscribtions }}
+        </div>
       </div>
     </div>
   </div>
